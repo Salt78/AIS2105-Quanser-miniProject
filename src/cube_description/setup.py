@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 import os
 from glob import glob
 
-package_name = 'joint_description'
+package_name = 'cube_description'
 
 setup(
     name=package_name,
