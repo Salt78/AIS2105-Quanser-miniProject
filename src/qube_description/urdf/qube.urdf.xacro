@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="myfirst">
 
-  <xacro:include filename="$(find joint_description)/urdf/joint_model.macro.urdf"/>
+  <xacro:include filename="$(find qube_description)/urdf/qube.macro.xacro"/>
 
   <link name="world"/>
   <link name="base_link"/>
@@ -19,6 +19,6 @@
   </joint>
 
 
-  <xacro:simple_motor parent="base_link" prefix="motor1_"/>
-  <xacro:simple_motor parent="base_link2" prefix="motor2_"/>
+  <xacro:qube parent="base_link" prefix="motor1_"/>
+  <xacro:qube parent="base_link2" prefix="motor2_"/>
 </robot>
