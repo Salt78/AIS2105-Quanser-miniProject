@@ -4,7 +4,7 @@ from ament_index_python.packages import get_package_share_directory
 import xacro
 import os
 
-xacro_file = os.path.join(get_package_share_directory("joint_description"),"urdf","joint_model.urdf")
+xacro_file = os.path.join(get_package_share_directory("qube_description"),"urdf","cube.urdf.xacro")
 robot_description_content = xacro.process_file(xacro_file).toxml()
 
 def generate_launch_description():
@@ -14,7 +14,7 @@ def generate_launch_description():
             package='rviz2',
             executable='rviz2',
             name='rviz2',
-            arguments=['-d', [os.path.join(get_package_share_directory("joint_description"), 'rviz', 'urdf.rviz')]]
+            arguments=['-d', [os.path.join(get_package_share_directory("qube_description"), 'rviz', 'urdf.rviz')]]
         ),
         Node(
             package='robot_state_publisher',
