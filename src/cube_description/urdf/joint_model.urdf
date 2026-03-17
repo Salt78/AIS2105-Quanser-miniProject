@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="myfirst">
+
+  <xacro:include filename="$(find joint_description)/urdf/joint_model.macro.urdf"/>
+
+  <link name="world"/>
+  <link name="base_link"/>
+  <link name="base_link2"/>
+
+  <joint name="base_joint" type="fixed">
+    <parent link="world"/>
+    <child link="base_link"/>
+  </joint>
+
+  <joint name="base_joint2" type="fixed">
+    <parent link="world"/>
+    <child link="base_link2"/>
+    <origin xyz="2 0 0" />
+  </joint>
+
+
+  <xacro:simple_motor parent="base_link" prefix="motor1_"/>
+  <xacro:simple_motor parent="base_link2" prefix="motor2_"/>
+</robot>
