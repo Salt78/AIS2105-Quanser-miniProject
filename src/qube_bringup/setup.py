@@ -1,4 +1,6 @@
 from setuptools import find_packages, setup
+import os
+from glob import glob
 
 package_name = 'qube_bringup'
 
@@ -10,6 +12,9 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        (os.path.join('share', package_name, 'launch'), glob(os.path.join('launch', '*launch.[pxy][yma]*'))),
+        (os.path.join('share', package_name, 'urdf'), glob(os.path.join('urdf', '*'))),
+        (os.path.join('share', package_name, 'rviz'), glob(os.path.join('rviz', 'urdf.rviz'))),
     ],
     install_requires=['setuptools'],
     zip_safe=True,

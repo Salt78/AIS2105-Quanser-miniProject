@@ -52,7 +52,7 @@
       <origin xyz="0 0 ${box_width/2}"/>
     </joint>
 
-    <joint name="${prefix}angle_joint" type="revolute">
+    <joint name="${prefix}motor_joint" type="revolute">
       <parent link="${prefix}stator_link"/>
       <child link="${prefix}rotor_link"/>
       <origin xyz="0 0 ${box_width/2}"/>
