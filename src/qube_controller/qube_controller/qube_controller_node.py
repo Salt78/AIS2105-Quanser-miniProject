@@ -37,9 +37,16 @@ class QubeControllerNode(Node):
         super().__init__('qube_controller_node')
 
         self.declare_parameter('kp', 1.0)
+        self.kp = self.get_parameter('kp').get_parameter_value().double_value
+
         self.declare_parameter('ki', 0.0)
+        self.ki = self.get_parameter('ki').get_parameter_value().double_value
+
         self.declare_parameter('kd', 0.1)
+        self.kd = self.get_parameter('kd').get_parameter_value().double_value
+
         self.declare_parameter('target_position', 0.0)
+        self.reference = self.get_parameter('target_position').get_parameter_value().double_value
 
         kp = self.get_parameter('kp').value
         ki = self.get_parameter('ki').value
@@ -66,12 +73,12 @@ class QubeControllerNode(Node):
     def joint_state_callback(self, msg: JointState):
         self.latest_joint_state = msg
         self.get_logger().debug(
-            f"joint_states received position={msg.position} velocity={msg.velocity} effort={msg.effort}"
+            f"joint_states received position={msg.position} velocity={msg.velocity}"
         )
 
         if len(msg.position) > 0:
             current_position = msg.position[0]  
-            current_velocity = msg.velocity[0] if len(msg.velocity) > 0 else 0.0
+            current_velocity = msg.velocity[0] 
             error = self.target_position - current_position
 
             current_time = self.get_clock().now()
@@ -85,6 +92,41 @@ class QubeControllerNode(Node):
             self.get_logger().info(
                 f"Error: {error:.3f}, Control: {control_signal:.3f}, Rotor Position: {current_position:.3f}, Rotor Velocity: {current_velocity:.3f}"
             )
+
+    def parameter_callback(self, params):
+        """Callback to handle parameter updates."""
+        for param in params:
+            if param.name == 'target_position':
+                if (param.value >= 0.0):
+                    self.reference = param.value
+                    self.get_logger().info(f' target was set: {self.reference}')
+
+                    return SetParametersResult(successful = True)
+                return SetParametersResult(successful = False)
+            
+            if param.name == 'kp':
+                if (param.value >= 0.0):
+                    self.P = param.value
+                    self.get_logger().info(f' reference was set: {self.kp}')
+
+                    return SetParametersResult(successful = True)
+                return SetParametersResult(successful = False)
+            
+            if param.name == 'ki':
+                if (param.value >= 0.0):
+                    self.I = param.value
+                    self.get_logger().info(f' reference was set: {self.ki}')
+
+                    return SetParametersResult(successful = True)
+                return SetParametersResult(successful = False)
+            
+            if param.name == 'kd':
+                if (param.value >= 0.0):
+                    self.D = param.value
+                    self.get_logger().info(f' reference was set: {self.kd}')
+
+                    return SetParametersResult(successful = True)
+                return SetParametersResult(successful = False)
     
 
 def main():
