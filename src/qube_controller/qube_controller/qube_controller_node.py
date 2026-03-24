@@ -39,19 +39,18 @@ class QubeControllerNode(Node):
         self.declare_parameter('kp', 1.0)
         self.kp = self.get_parameter('kp').get_parameter_value().double_value
 
-        self.declare_parameter('ki', 0.0)
+        self.declare_parameter('ki', 1.0)
         self.ki = self.get_parameter('ki').get_parameter_value().double_value
 
         self.declare_parameter('kd', 0.1)
         self.kd = self.get_parameter('kd').get_parameter_value().double_value
 
         self.declare_parameter('target_position', 0.0)
-        self.reference = self.get_parameter('target_position').get_parameter_value().double_value
+        self.target_position = self.get_parameter('target_position').get_parameter_value().double_value
 
-        kp = self.get_parameter('kp').value
-        ki = self.get_parameter('ki').value
-        kd = self.get_parameter('kd').value
-        self.pid = PID(kp, ki, kd)
+        self.add_on_set_parameters_callback(self.parameter_callback)
+
+        self.pid = PID(self.kp, self.ki, self.kd)
 
         self.joint_state_sub = self.create_subscription(
             JointState,
@@ -65,9 +64,6 @@ class QubeControllerNode(Node):
             '/velocity_controller/commands',
             10
         )
-
-        self.latest_joint_state = None
-        self.target_position = self.get_parameter('target_position').value
 
     
     def joint_state_callback(self, msg: JointState):
@@ -84,7 +80,6 @@ class QubeControllerNode(Node):
             current_time = self.get_clock().now()
             control_signal = self.pid.update(error, current_time)
 
-            # Publish as Float64MultiArray
             velocity_msg = Float64MultiArray()
             velocity_msg.data = [control_signal]  
             self.velocity_pub.publish(velocity_msg)
@@ -98,32 +93,32 @@ class QubeControllerNode(Node):
         for param in params:
             if param.name == 'target_position':
                 if (param.value >= 0.0):
-                    self.reference = param.value
-                    self.get_logger().info(f' target was set: {self.reference}')
+                    self.target_position = param.value
+                    self.get_logger().info(f' target was set: {self.target_position}')
 
                     return SetParametersResult(successful = True)
                 return SetParametersResult(successful = False)
             
             if param.name == 'kp':
                 if (param.value >= 0.0):
-                    self.P = param.value
-                    self.get_logger().info(f' reference was set: {self.kp}')
+                    self.pid.kp = param.value
+                    self.get_logger().info(f' reference was set: {self.pid.kp}')
 
                     return SetParametersResult(successful = True)
                 return SetParametersResult(successful = False)
             
             if param.name == 'ki':
                 if (param.value >= 0.0):
-                    self.I = param.value
-                    self.get_logger().info(f' reference was set: {self.ki}')
+                    self.pid.ki = param.value
+                    self.get_logger().info(f' reference was set: {self.pid.ki}')
 
                     return SetParametersResult(successful = True)
                 return SetParametersResult(successful = False)
             
             if param.name == 'kd':
                 if (param.value >= 0.0):
-                    self.D = param.value
-                    self.get_logger().info(f' reference was set: {self.kd}')
+                    self.pid.kd = param.value
+                    self.get_logger().info(f' reference was set: {self.pid.kd}')
 
                     return SetParametersResult(successful = True)
                 return SetParametersResult(successful = False)
