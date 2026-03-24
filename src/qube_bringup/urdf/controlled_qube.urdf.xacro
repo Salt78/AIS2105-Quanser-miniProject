@@ -2,9 +2,9 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="myfirst">
   <xacro:include filename="$(find qube_driver)/ros2_control/qube_driver.ros2_control.xacro"/>
 
-  <xacro:arg name="baud_rate" default="9600"/>
+  <xacro:arg name="baud_rate" default="115200"/>
   <xacro:arg name="device" default="/dev/ttyACM0"/>
-  <xacro:arg name="simulation" default="true"/>
+  <xacro:arg name="simulation" default="false"/>
 
   <xacro:qube_driver_ros2_control 
     name="qube_driver" prefix="" 

@@ -15,16 +15,16 @@ launch_dir = PathJoinSubstitution([FindPackageShare('qube_driver'), 'launch'])
 def generate_launch_description():
     return LaunchDescription([
         Node(
-            package='rviz2',
-            executable='rviz2',
-            name='rviz2',
-            arguments=['-d', [os.path.join(get_package_share_directory("qube_bringup"), 'rviz', 'urdf.rviz')]]
-        ),
-        Node(
             package='robot_state_publisher',
             executable='robot_state_publisher',
             output='screen',
             parameters=[{'robot_description': robot_description_content}]
+        ),
+        Node(
+            package='rviz2',
+            executable='rviz2',
+            name='rviz2',
+            arguments=['-d', [os.path.join(get_package_share_directory("qube_bringup"), 'rviz', 'urdf.rviz')]]
         ),
          Node(
             package='joint_state_publisher_gui',
