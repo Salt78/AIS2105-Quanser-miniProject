@@ -3,7 +3,7 @@
 <package format="3">
   <name>qube_description</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
+  <description>Visualises URDF for a Quanser cube using Rviz2</description>
   <maintainer email="andrava@stud.ntnu.no">andreas</maintainer>
   <license>Apache-2.0</license>
 
