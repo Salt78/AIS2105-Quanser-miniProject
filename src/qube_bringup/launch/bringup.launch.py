@@ -26,15 +26,20 @@ def generate_launch_description():
             name='rviz2',
             arguments=['-d', [os.path.join(get_package_share_directory("qube_bringup"), 'rviz', 'urdf.rviz')]]
         ),
-         Node(
-            package='joint_state_publisher_gui',
-            executable='joint_state_publisher_gui',
-            name='joint_state_publisher_gui'
-        ),
+       # Node(
+       #    package='joint_state_publisher_gui',
+       #    executable='joint_state_publisher_gui',
+       #    name='joint_state_publisher_gui'
+       #),
         IncludeLaunchDescription(
             PathJoinSubstitution([launch_dir, 'qube_driver.launch.py']),
             launch_arguments={
                 'robot_description': robot_description_content
             }.items()
-        )       
+        ),
+        Node(
+            package='qube_controller',
+            name='qube_controller',
+            executable='qube_controller_node',
+        ),       
     ])
