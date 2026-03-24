@@ -14,7 +14,7 @@ launch_dir = PathJoinSubstitution([FindPackageShare('qube_driver'), 'launch'])
 def generate_launch_description():
     return LaunchDescription([
         DeclareLaunchArgument('baud_rate', default_value='115200'),
-        DeclareLaunchArgument('device', default_value='/dev/ACM0'),
+        DeclareLaunchArgument('device', default_value='/dev/ttyACM0'),
         DeclareLaunchArgument('simulator', default_value='false'),
         Node(
             package='robot_state_publisher',
