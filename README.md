@@ -37,19 +37,19 @@ The parameters kP, kI, kD and setpoint of the PID controller can be changed by u
 
 **setpoint** 
 ```
-ros2 param set /qube_controller_node target_position value
+ros2 param set /qube_controller target_position value
 ```
 **kP**
 ```
-ros2 param set /qube_controller_node kp value
+ros2 param set /qube_controller kp value
 ```
 **kI**
 ```
-ros2 param set /qube_controller_node ki value
+ros2 param set /qube_controller ki value
 ```
 **kD**
 ```
-ros2 param set /qube_controller_node kd value
+ros2 param set /qube_controller kd value
 ```
 
 ## Troubleshooting
