@@ -33,7 +33,7 @@ Example of simulation enabled:
 ros2 launch qube_bringup bringup.launch.py simulation:=true
 ```
 
-The parameters kP, kI, kD and setpoint of the qube controller can be changed by using param set:
+The parameters kP, kI, kD and setpoint of the PID controller can be changed by using param set:
 ### setpoint 
 ```
 ros2 param set /qube_controller_node target_position value
