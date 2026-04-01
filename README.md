@@ -8,7 +8,7 @@ This is a ROS2 project with the goal of controlling and visualizing a Quanser cu
 * ros-jazzy-ros2-controller
 
 ## How to build and run?
-
+To build the project copy and run the following commands in your terminal window:
 ```
 git clone --recurse-submodules https://github.com/Salt78/AIS2105-Quanser-miniProject.git
 cd AIS2105-Quanser-miniProject
@@ -17,7 +17,7 @@ source install/setup.bash
 
 ```
 
-The project can be run by using this launch file:
+The project can be run by running this launch file:
 
 ```
 ros2 launch qube_bringup bringup.launch.py
