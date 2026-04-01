@@ -34,19 +34,20 @@ ros2 launch qube_bringup bringup.launch.py simulation:=true
 ```
 
 The parameters kP, kI, kD and setpoint of the PID controller can be changed by using param set:
-### setpoint 
+
+**setpoint** 
 ```
 ros2 param set /qube_controller_node target_position value
 ```
-### kP
+**kP**
 ```
 ros2 param set /qube_controller_node kp value
 ```
-### kI
+**kI**
 ```
 ros2 param set /qube_controller_node ki value
 ```
-### kD
+**kD**
 ```
 ros2 param set /qube_controller_node kd value
 ```
