@@ -57,4 +57,4 @@ After running the launch file you might be stuck on this warning:
 [spawner_velocity_controller]: Could not contact service /controller_manager/list_controllers
 [spawner-4] [INFO] [1775046460.785208051] [spawner_velocity_controller]: waiting for service /controller_manager/list_controllers to become available...
 ```
-This issue can be fixed by replacing the launch file within src/qube_driver/launch/qube_driver.launch.py with /fixed_qube_driver.launch.py.
+This issue can be fixed by replacing the launch file within /src/qube_driver/launch/qube_driver.launch.py with /fixed_qube_driver.launch.py.
