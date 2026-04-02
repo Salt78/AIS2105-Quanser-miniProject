@@ -20,7 +20,7 @@ setup(
     zip_safe=True,
     maintainer='andreas',
     maintainer_email='andrava@stud.ntnu.no',
-    description='TODO: Package description',
+    description='Visualises URDF for a Quanser cube using Rviz2',
     license='Apache-2.0',
     extras_require={
         'test': [

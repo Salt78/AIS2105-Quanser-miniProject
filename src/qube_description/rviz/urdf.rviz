@@ -1,7 +1,8 @@
 #Uses a fixed reference frame "world" for all displays.
 #Shows a ground grid.
 #Loads and renders the robot model from /robot_description.
-#Provides an orbit camera view with preset angle and distance for 3D navigation.
+#Provides an orbit camera view.
+#Grabbed from urdf_tutorial pkg
 Panels:
   - Class: rviz_common/Displays
     Name: Displays

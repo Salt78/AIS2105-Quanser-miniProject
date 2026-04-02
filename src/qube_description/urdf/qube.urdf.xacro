@@ -3,11 +3,14 @@
   <link name="world"/>
   <link name="base_link"/>
 
+  <!--The base joint is used to fix the Qube (from macro) 
+  to the world frame-->
   <joint name="base_joint" type="fixed">
     <parent link="world"/>
     <child link="base_link"/>
   </joint>
 
+  <!-- Places Quanser cube -->
   <xacro:include filename="$(find qube_description)/urdf/qube.macro.xacro"/>
   <xacro:qube parent="base_link" prefix="motor1_"/>
 </robot>
