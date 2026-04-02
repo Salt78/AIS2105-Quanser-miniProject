@@ -4,7 +4,7 @@ from ament_index_python.packages import get_package_share_directory
 import xacro
 import os
 
-xacro_file = os.path.join(get_package_share_directory("qube_description"),"urdf","cube.urdf.xacro")
+xacro_file = os.path.join(get_package_share_directory("qube_description"),"urdf","qube.urdf.xacro")
 robot_description_content = xacro.process_file(xacro_file).toxml()
 
 def generate_launch_description():
