@@ -1,9 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
 
-  <material name="blue">
-      <color rgba="0 0 0.8 1"/>
-    </material>
     <material name="black">
       <color rgba="0 0 0 1"/>
     </material>
@@ -13,6 +10,7 @@
 
   <xacro:macro name="qube" params="parent prefix">
 
+    <!--Dimensions of Qube-->
     <xacro:property name="box_width" value="0.102"/>
     <xacro:property name="rotor_radius" value="0.025"/>
     <xacro:property name="rotor_length" value="0.01"/>

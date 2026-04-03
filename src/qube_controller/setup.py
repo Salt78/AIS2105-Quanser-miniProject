@@ -15,8 +15,8 @@ setup(
     zip_safe=True,
     maintainer='haakon',
     maintainer_email='haakon.sagmo@outlook.com',
-    description='TODO: Package description',
-    license='TODO: License declaration',
+    description='PID regulator for controlling position of Quanser Qube',
+    license='Apache-2.0',
     extras_require={
         'test': [
             'pytest',
