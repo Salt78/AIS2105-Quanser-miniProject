@@ -25,7 +25,8 @@ ros2 launch qube_bringup bringup.launch.py
 
 The launch file supports the following arguments with these default values:
 * baud_rate = 115200
-* device = /dev/ttyACM0
+* device = /dev/ttyACM0if output > 5.0 and output < 10.0:
+            output = 10
 * simulation = false
 
 Example of simulation enabled:
@@ -58,4 +59,8 @@ After running the launch file you might be stuck on this warning:
 [spawner_velocity_controller]: Could not contact service /controller_manager/list_controllers
 [spawner-4] [INFO] [1775046460.785208051] [spawner_velocity_controller]: waiting for service /controller_manager/list_controllers to become available...
 ```
-This issue can be fixed by replacing the launch file within /src/qube_driver/launch/qube_driver.launch.py with /fixed_qube_driver.launch.py.
+This issue can be fixed by replacing the launch file within /src/qube_driver/launch/qube_driver.launch.py with /fixed_qube_driver.launch.py. Remember to rename fixed_qube_driver.launch.py to qube_driver.launch.py. Afterwards you need to run
+```
+colcon build
+```
+in the root of the repository. Now the project can be ran again.
