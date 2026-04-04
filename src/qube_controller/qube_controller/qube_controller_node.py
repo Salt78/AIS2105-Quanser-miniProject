@@ -16,6 +16,7 @@ class PID:
         self.integral = 0.0
         self.prev_error = 0.0
         self.prev_time = None
+        self.prev_output = 0.0
 
     def update(self, error, current_time):
         if self.prev_time is None:
@@ -25,37 +26,38 @@ class PID:
             if dt <= 0:
                 dt = 0.001 
 
-        self.integral += error * dt
-        self.integrap = min(-5, max(self.integral, 5)) #Windup limit
+        if not self.prev_output == -999 and not self.prev_output == 999:
+            self.integral += error * dt
 
 
         derivative = (error - self.prev_error) / dt
         output = self.kp * error + self.ki * self.integral + self.kd * derivative
         
         #Resolves deadband issue when regulator output value is small
-        if output > 3.0 and output < 10.0:
+        if output > 5.0 and output < 10.0:
             output = 10.0
         
-        if output > -10.0 and output < -3.0:
+        if output > -10.0 and output < -5.0:
             output = -10.0
 
         clamped = max(-999.0, min(output, 999.0)) #Prevents eratic behaviour from Qube
 
         self.prev_error = error
         self.prev_time = current_time
+        self.prev_output = clamped
         return clamped
 
 class QubeControllerNode(Node):
     def __init__(self):
         super().__init__('qube_controller_node')
 
-        self.declare_parameter('kp', 13.0)
+        self.declare_parameter('kp', 5.0)
         self.kp = self.get_parameter('kp').get_parameter_value().double_value
 
-        self.declare_parameter('ki', 0.0)
+        self.declare_parameter('ki', 2.0)
         self.ki = self.get_parameter('ki').get_parameter_value().double_value
 
-        self.declare_parameter('kd', 3.0)
+        self.declare_parameter('kd', 0.3)
         self.kd = self.get_parameter('kd').get_parameter_value().double_value
 
         self.declare_parameter('target_position', 0.0)
