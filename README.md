@@ -21,7 +21,7 @@ This is a ROS2 project with the goal of controlling and visualizing a Quanser cu
 To build the project copy and run the following commands in your terminal window:
 ```
 git clone --recurse-submodules https://github.com/Salt78/AIS2105-Quanser-miniProject.git
-cd AIS2105-Quanser-miniProject
+cd AIS2105-Quanser-miniProject/
 colcon build
 source install/setup.bash
 
