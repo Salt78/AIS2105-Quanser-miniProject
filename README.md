@@ -24,7 +24,6 @@ git clone --recurse-submodules https://github.com/Salt78/AIS2105-Quanser-miniPro
 cd AIS2105-Quanser-miniProject/
 colcon build
 source install/setup.bash
-
 ```
 
 The project can be run by running this launch file:
