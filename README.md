@@ -7,6 +7,16 @@ This is a ROS2 project with the goal of controlling and visualizing a Quanser cu
 * ros-jazzy-ros2-control
 * ros-jazzy-ros2-controller
 
+## Package Overview
+
+| Package | Purpose |
+|---------|---------|
+| **qube_bringup** | Top-level package for starting the other packages. |
+| **qube_description** | Used for visualizing the Qube in Rviz. Contains URDF. |
+| **qube_controller** | PID regulator for Quanser Qube |
+|**qube_driver**|Handles communication between ROS2 and Qube (Arduino). Handles simulation logic|
+
+
 ## How to build and run?
 To build the project copy and run the following commands in your terminal window:
 ```
@@ -25,8 +35,7 @@ ros2 launch qube_bringup bringup.launch.py
 
 The launch file supports the following arguments with these default values:
 * baud_rate = 115200
-* device = /dev/ttyACM0if output > 5.0 and output < 10.0:
-            output = 10
+* device = /dev/ttyACM0
 * simulation = false
 
 Example of simulation enabled:
