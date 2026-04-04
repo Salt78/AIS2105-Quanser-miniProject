@@ -26,8 +26,9 @@ class PID:
             if dt <= 0:
                 dt = 0.001 
 
-        if not self.prev_output == -999 and not self.prev_output == 999:
-            self.integral += error * dt
+        #Anti-windup
+        self.integral += error * dt
+        self.integral = max(-5.0, min(self.integral, 5.0))
 
 
         derivative = (error - self.prev_error) / dt
