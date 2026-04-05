@@ -1,6 +1,5 @@
 import rclpy
 from rclpy.node import Node
-from std_msgs.msg import Float64
 from std_msgs.msg import Float64MultiArray
 from sensor_msgs.msg import JointState 
 from rcl_interfaces.msg import SetParametersResult
@@ -26,9 +25,9 @@ class PID:
             if dt <= 0:
                 dt = 0.001 
 
-        #Anti-windup
+        
         self.integral += error * dt
-        self.integral = max(-5.0, min(self.integral, 5.0))
+        self.integral = max(-5.0, min(self.integral, 5.0)) #Limits integral
 
 
         derivative = (error - self.prev_error) / dt

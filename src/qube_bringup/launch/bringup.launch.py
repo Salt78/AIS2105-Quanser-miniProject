@@ -12,6 +12,7 @@ xacro_file = os.path.join(get_package_share_directory("qube_bringup"),"urdf","co
 
 launch_dir = PathJoinSubstitution([FindPackageShare('qube_driver'), 'launch'])
 
+#Processes URDF Xacro using launch arguments
 def launch_setup(context, *args, **kwargs):
     simulation = LaunchConfiguration('simulation').perform(context)
     baud_rate = LaunchConfiguration('baud_rate').perform(context)
@@ -41,22 +42,21 @@ def generate_launch_description():
         DeclareLaunchArgument('baud_rate', default_value='115200'),
         DeclareLaunchArgument('device', default_value='/dev/ttyACM0'),
         DeclareLaunchArgument('simulation', default_value='false'),
-        OpaqueFunction(function=launch_setup),
+
+        OpaqueFunction(function=launch_setup), #Calls function launch_setup 
+
         Node(
             package='rviz2',
             executable='rviz2',
             name='rviz2',
-            arguments=['-d', [os.path.join(get_package_share_directory("qube_bringup"), 'rviz', 'urdf.rviz')]]
+            arguments=['-d', [os.path.join(get_package_share_directory("qube_description"), 'rviz', 'urdf.rviz')]]
         ),
-       # Node(
-       #    package='joint_state_publisher_gui',
-       #    executable='joint_state_publisher_gui',
-       #    name='joint_state_publisher_gui'
-       #),
+
         IncludeLaunchDescription( #Launches launch file for qube_driver
             PathJoinSubstitution([launch_dir, 'qube_driver.launch.py']),
         ),
-        Node(
+
+        Node( #PID regulator
             package='qube_controller',
             name='qube_controller',
             executable='qube_controller_node',
