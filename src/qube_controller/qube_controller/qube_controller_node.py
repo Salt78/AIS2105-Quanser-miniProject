@@ -3,7 +3,6 @@ from rclpy.node import Node
 from std_msgs.msg import Float64MultiArray
 from sensor_msgs.msg import JointState 
 from rcl_interfaces.msg import SetParametersResult
-import numpy as np
 
 
 
