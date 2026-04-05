@@ -19,7 +19,7 @@ This is a ROS2 project with the goal of controlling and visualizing a Quanser cu
 
 ## How to build and run?
 To build the project copy and run the following commands in your terminal window:
-```
+```bash
 git clone --recurse-submodules https://github.com/Salt78/AIS2105-Quanser-miniProject.git
 cd AIS2105-Quanser-miniProject/
 colcon build
@@ -28,7 +28,7 @@ source install/setup.bash
 
 The project can be run by running this launch file:
 
-```
+```bash
 ros2 launch qube_bringup bringup.launch.py
 ```
 
@@ -38,37 +38,37 @@ The launch file supports the following arguments with these default values:
 * simulation = false
 
 Example of simulation enabled:
-```
+```bash
 ros2 launch qube_bringup bringup.launch.py simulation:=true
 ```
 
 The parameters kP, kI, kD and setpoint of the PID controller can be changed by using param set:
 
 **setpoint** 
-```
+```bash
 ros2 param set /qube_controller target_position value
 ```
 **kP**
-```
+```bash
 ros2 param set /qube_controller kp value
 ```
 **kI**
-```
+```bash
 ros2 param set /qube_controller ki value
 ```
 **kD**
-```
+```bash
 ros2 param set /qube_controller kd value
 ```
 
 ## Troubleshooting
 After running the launch file you might be stuck on this warning:
-```
+```bash
 [spawner_velocity_controller]: Could not contact service /controller_manager/list_controllers
 [spawner-4] [INFO] [1775046460.785208051] [spawner_velocity_controller]: waiting for service /controller_manager/list_controllers to become available...
 ```
 This issue can be fixed by replacing the launch file within /src/qube_driver/launch/qube_driver.launch.py with /fixed_qube_driver.launch.py. Remember to rename fixed_qube_driver.launch.py to qube_driver.launch.py. Afterwards you need to run
-```
+```bash
 colcon build
 ```
 in the root of the repository. Now the project can be ran again.
